@@ -26,7 +26,7 @@ class user {
                 }
             });
             if (!loggedIn) {
-                alert("Invalid Info, Access Denied")
+                alert("Invalid Info, Access Denied");
             }
         } catch (error) {
             alert("No users are registered.");

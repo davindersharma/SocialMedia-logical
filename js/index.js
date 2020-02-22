@@ -19,23 +19,38 @@ $(".btnRegister").onclick = () => {
 
 
 
-    JSON.parse(localStorage.getItem("registeredUsers")).forEach(user => {
-        if (user.userId == userId) {
-            alert("User id already exists.");
-            unique = false;
+    try {
+        JSON.parse(localStorage.getItem("registeredUsers")).forEach(user => {
+            if (user.userId == userId) {
+                alert("User id already exists.");
+                unique = false;
+            }
+        });
+        if (!unique) {
+            var u = new user(name, userId, password);
+            console.log(u);
+
+            newapp.UsersRegistered.push(u);
+
+            console.log(newapp.UsersRegistered);
+
+            localStorage.setItem("registeredUsers", JSON.stringify(newapp.UsersRegistered));
         }
-    });
-    if (unique) {
-        var u = new user(name, userId, password);
-        console.log(u);
 
-        newapp.UsersRegistered.push(u);
+    } catch (error) {
+        if (unique) {
+            var u = new user(name, userId, password);
+            console.log(u);
 
-        console.log(newapp.UsersRegistered);
+            newapp.UsersRegistered.push(u);
 
-        localStorage.setItem("registeredUsers", JSON.stringify(newapp.UsersRegistered));
-    } else {
-        alert("User already exists.");
+            console.log(newapp.UsersRegistered);
+
+            localStorage.setItem("registeredUsers", JSON.stringify(newapp.UsersRegistered));
+        } else {
+            alert("User already exists.");
+        }
+
     }
 }
 
